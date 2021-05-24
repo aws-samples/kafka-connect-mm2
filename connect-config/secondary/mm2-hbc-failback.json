@@ -1,0 +1,22 @@
+{
+    "name": "mm2-hbc-failback",
+    "connector.class": "org.apache.kafka.connect.mirror.MirrorHeartbeatConnector",
+    "replication.policy.class":"com.amazonaws.kafka.samples.CustomMM2ReplicationPolicy",
+    "clusters": "sec, prim",
+    "source.cluster.alias": "sec",
+    "source.cluster.bootstrap.servers": SECONDARY_BOOTSTRAP_URL,
+    "source.cluster.security.protocol": "SASL_SSL",
+    "source.cluster.sasl.mechanism" : "SCRAM-SHA-512",
+    "source.cluster.sasl.jaas.config" :" org.apache.kafka.common.security.scram.ScramLoginModule  required  username=\"USERNAME\"   password=\"PASSWORD\"; ",
+    "target.cluster.alias": "prim",
+    "target.cluster.bootstrap.servers": PRIMARY_BOOTSTRAP_URL,
+    "target.cluster.security.protocol": "SASL_SSL",
+    "target.cluster.sasl.mechanism" : "SCRAM-SHA-512",
+    "target.cluster.sasl.jaas.config" :" org.apache.kafka.common.security.scram.ScramLoginModule  required  username=\"USERNAME\"   password=\"PASSWORD\"; ",
+    "tasks.max": "2",
+    "key.converter": " org.apache.kafka.connect.converters.ByteArrayConverter",
+    "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
+    "replication.factor": "3",
+    "heartbeats.topic.replication.factor": "2",
+    "emit.heartbeats.interval.seconds": "20"
+}

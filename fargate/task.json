@@ -1,0 +1,52 @@
+{
+    "executionRoleArn": "<iamrole>",
+    "containerDefinitions": [
+      {
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "secretOptions": null,
+          "options": {
+            "awslogs-group": "/ecs/kafka-connect",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+        },
+        "portMappings": [ 
+          { 
+             "containerPort": 8083,
+             "hostPort": 8083,
+             "protocol": "tcp"
+          }
+       ],
+        "environment": [
+          {
+            "name": "BROKERS",
+            "value": ""
+          },
+          {
+            "name": "USERNAME",
+            "value": ""
+          },
+          {
+            "name": "PASSWORD",
+            "value": ""
+          },
+          {
+            "name": "GROUP",
+            "value": ""
+          }
+        ],
+        "image": "<image>",
+        "essential": true,
+        "name": "kafka-connect"
+      }
+    ],
+    "memory": "4096",
+    "taskRoleArn": "<taskrole>",
+    "family": "kafka-connect",
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "1024"
+  }
