@@ -1,5 +1,5 @@
 {
-    "executionRoleArn": "<iamrole>",
+    "executionRoleArn": IAM_ROLE,
     "containerDefinitions": [
       {
         "logConfiguration": {
@@ -21,28 +21,28 @@
         "environment": [
           {
             "name": "BROKERS",
-            "value": ""
+            "value": BROKERS
           },
           {
             "name": "USERNAME",
-            "value": ""
+            "value": USERNAME
           },
           {
             "name": "PASSWORD",
-            "value": ""
+            "value": PASSWORD
           },
           {
             "name": "GROUP",
-            "value": ""
+            "value": GROUP
           }
         ],
-        "image": "<image>",
+        "image": IMAGE_URL,
         "essential": true,
         "name": "kafka-connect"
       }
     ],
     "memory": "4096",
-    "taskRoleArn": "<taskrole>",
+    "taskRoleArn": IAM_ROLE,
     "family": "kafka-connect",
     "requiresCompatibilities": [
       "FARGATE"
