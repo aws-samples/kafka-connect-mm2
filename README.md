@@ -14,12 +14,17 @@ This repository includes dockerfile, fargate task definition and mirror maker co
 Tag the docker image and push it to a container registry before deploying it as a fargate task.
 connect-distributed.properties file in the docker is configured to connect to a Kafka cluster configured with SASL/SCRAM authentication. 
 
-To deploy fargate task, make sure to pass the following environment variables to a sample task.json found under **fargate** folder. 
+To deploy fargate task, make sure to replace following variables in task.json found under **fargate** folder.  
 
-*	**brokers** –  Bootstrap servers connection string of Amazon MSK cluster / Apache Kafka cluster on which Kafka connect is to be deployed
-*	**username** – Username configured as part of SASL/SCRAM configuration of Kafka. In Amazon MSK configuration, this will be the secret in AWS secrets manager associated with the cluser.
-*	**password** – Password configured as part of SASL/SCRAM configuration of Kafka. In Amazon MSK configuration, this will be the secret in AWS secrets manager associated with the cluser.
-*	**groupid** – Group name. Can be any random string that will be used as suffix when kafka connect topics are created for Kafka connect.
+* **IMAGE_URL** - container registry url of the docker image
+* **IAM_ROLE** - ECS Task role with permission to interact with MSK clusters, read secrets from secret manager, decrypt KMS key used to encrypt the secret, read images from ECR, and write logs to cloudwatch.  
+
+Environment Variables - 
+
+*	**BROKERS** –  Bootstrap servers connection string of Amazon MSK cluster / Apache Kafka cluster on which Kafka connect is to be deployed
+*	**USERNAME** – Username configured as part of SASL/SCRAM configuration of Kafka. In Amazon MSK configuration, this will be the secret in AWS secrets manager associated with the cluser.
+*	**PASSWORD** – Password configured as part of SASL/SCRAM configuration of Kafka. In Amazon MSK configuration, this will be the secret in AWS secrets manager associated with the cluser.
+*	**GROUP** – Group name. Can be any random string that will be used as suffix when kafka connect topics are created for Kafka connect.
 
 ### Mirror Maker
 
