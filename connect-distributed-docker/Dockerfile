@@ -1,9 +1,9 @@
-FROM centos:latest
+FROM amazonlinux:2
 
 RUN yum install -y wget tar openssh-server openssh-clients sysstat sudo which openssl hostname
 RUN yum install -y java-1.8.0-openjdk-devel
-RUN yum install -y epel-release &&\
-    yum install -y jq &&\
+RUN amazon-linux-extras install epel -y
+RUN yum install -y jq &&\
     yum install -y python3 &&\
     yum install -y nmap-ncat git
 ARG MAVEN_VERSION=3.5.4
@@ -24,7 +24,7 @@ RUN python3 get-pip.py
 RUN pip3 install awscli
 
 ENV SCALA_VERSION 2.13
-ENV KAFKA_VERSION 2.7.0
+ENV KAFKA_VERSION 3.2.0
 
 RUN yum -y update && yum -y install tar gzip wget
 
@@ -42,7 +42,7 @@ RUN find /usr/lib/jvm/ -name "cacerts" -exec cp {} /tmp/kafka.client.truststore.
 ADD connect-distributed.properties /opt/connect-distributed.properties
 
 
-RUN mv target/CustomMM2ReplicationPolicy-1.0-SNAPSHOT.jar /opt/kafka_2.13-2.7.0/libs
+RUN mv target/CustomMM2ReplicationPolicy-1.0-SNAPSHOT.jar /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}/libs
 
 # include all start scripts
 ADD start-kafka-connect.sh /opt/start-kafka-connect.sh
