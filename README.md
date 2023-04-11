@@ -33,7 +33,7 @@ Environment Variables -
 To run a successful MirrorMaker 2.0 deployment, you need 3 different connectors 
 
 * **MirrorSourceConnector** - This connector is used to replicate topics and metadata from one Kafka cluster to another. This connector will read from an external Kafka cluster and write it to the Kafka cluster on which the Kafka connect is running.
-* **MirrorSourceConnector** - This connector emits a heartbeat topic which gets replicated to demonstrate connectivity across clusters. This is to ensure the connectivity between two clusters are active.
+* **HeartBeatConnector** - This connector emits a heartbeat topic which gets replicated to demonstrate connectivity across clusters. This is to ensure the connectivity between two clusters are active.
 * **CheckpointConnector** - This connector is responsible to emit checkpoints in the secondary cluster containing offsets for each consumer group in the primary cluster. This is responsible for replicating consumer offset from one cluster to another.
 
 Sample connector configuration file for each of these connector are available under **connect-config** folder. Make sure to replace **PRIMARY_BOOTSTRAP_URL**, **SECONDARY_BOOTRSTRAP_URL**, **USERNAME** and **PASSWORD** variables in the configuration files (to applicable values).
